@@ -454,17 +454,54 @@ const KidDetails = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center p-6">
-      <div className="max-w-2xl w-full bg-gray-900/90 backdrop-blur-lg rounded-3xl shadow-2xl p-8 border border-gray-700/50">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-white mb-4">Tell us about your little one!</h1>
-          <p className="text-lg text-gray-200">Let's create a personalized story just for them</p>
+    <div className="min-h-screen bg-gray-900 text-white">
+      {/* Step Indicator */}
+      <div className="flex justify-center pt-8 pb-6">
+        <div className="flex items-center space-x-8">
+          {[
+            { num: 1, label: 'Kid Details', sublabel: 'Photos & Info', active: true },
+            { num: 2, label: 'Theme', sublabel: 'Story Setting', active: false },
+            { num: 3, label: 'Story Specs', sublabel: 'Customize', active: false },
+            { num: 4, label: 'Creating Magic', sublabel: 'AI Generation', active: false }
+          ].map((step, index) => (
+            <div key={step.num} className="flex items-center">
+              <div className="text-center">
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold mb-1 ${
+                  step.active ? 'bg-blue-500 text-white' : 'bg-gray-700 text-gray-400'
+                }`}>
+                  {step.num}
+                </div>
+                <div className={`text-xs font-medium ${step.active ? 'text-white' : 'text-gray-400'}`}>
+                  {step.label}
+                </div>
+                <div className={`text-xs ${step.active ? 'text-gray-300' : 'text-gray-500'}`}>
+                  {step.sublabel}
+                </div>
+              </div>
+              {index < 3 && (
+                <div className="w-8 h-px bg-gray-600 mx-4 mt-[-20px]"></div>
+              )}
+            </div>
+          ))}
         </div>
+      </div>
 
-        <form onSubmit={handleSubmit} className="space-y-8">
-          {/* Photo Upload */}
-          <div className="text-center">
-            <div className="relative inline-block">
+      {/* Main Content */}
+      <div className="flex items-center justify-center px-6">
+        <div className="max-w-lg w-full">
+          {/* Header */}
+          <div className="text-center mb-8">
+            <h1 className="text-3xl font-bold text-white mb-3">Tell Us About Your Little Hero!</h1>
+            <p className="text-gray-400 text-sm">Upload photos and share their names to personalize the story</p>
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-6">
+            {/* Photo Upload */}
+            <div>
+              <label className="block text-white text-sm font-medium mb-3 flex items-center">
+                <span className="mr-2">📷</span>
+                Upload Kid's Photo
+              </label>
               <input
                 type="file"
                 id="photo"
@@ -474,73 +511,83 @@ const KidDetails = () => {
               />
               <label 
                 htmlFor="photo"
-                className="cursor-pointer block w-32 h-32 mx-auto rounded-full border-4 border-dashed border-gray-400/60 hover:border-gray-300/80 transition-colors overflow-hidden bg-gray-800/50"
+                className="cursor-pointer block w-full h-48 border-2 border-dashed border-gray-600 rounded-lg bg-gray-800 hover:bg-gray-750 transition-colors"
               >
                 {kidData.photo ? (
                   <img 
                     src={kidData.photo} 
                     alt="Kid" 
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-cover rounded-lg"
                   />
                 ) : (
-                  <div className="flex items-center justify-center h-full">
-                    <span className="text-white text-sm">Add Photo</span>
+                  <div className="flex flex-col items-center justify-center h-full">
+                    <div className="w-12 h-12 bg-blue-500 rounded-lg flex items-center justify-center mb-3">
+                      <span className="text-white text-xl">📷</span>
+                    </div>
+                    <p className="text-white text-sm font-medium mb-1">Drag & drop a photo here</p>
+                    <p className="text-gray-400 text-xs">or click to browse files</p>
                   </div>
                 )}
               </label>
             </div>
-            <p className="text-sm text-gray-300 mt-2">Click to upload a photo</p>
-          </div>
 
-          {/* Name Input */}
-          <div>
-            <label className="block text-white text-lg font-semibold mb-3">
-              What's their name?
-            </label>
-            <input
-              type="text"
-              value={kidData.name}
-              onChange={(e) => setKidData(prev => ({ ...prev, name: e.target.value }))}
-              placeholder="Enter name..."
-              className="w-full px-6 py-4 text-lg rounded-2xl border border-gray-600/50 bg-gray-800/70 backdrop-blur text-white placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-blue-500/50 focus:border-blue-500/50"
-              required
-            />
-          </div>
-
-          {/* Age Selection */}
-          <div>
-            <label className="block text-white text-lg font-semibold mb-3">
-              How old are they?
-            </label>
-            <div className="grid grid-cols-4 gap-3">
-              {[3, 4, 5, 6, 7, 8, 9, 10, 11, 12].map(age => (
-                <button
-                  key={age}
-                  type="button"
-                  onClick={() => setKidData(prev => ({ ...prev, age: age.toString() }))}
-                  className={`py-3 px-4 rounded-xl text-lg font-semibold transition-all ${
-                    kidData.age === age.toString()
-                      ? 'bg-blue-600 text-white shadow-lg scale-105 border-2 border-blue-400'
-                      : 'bg-gray-800/70 text-white hover:bg-gray-700/80 border-2 border-gray-600/50 hover:border-gray-500'
-                  }`}
-                >
-                  {age}
-                </button>
-              ))}
+            {/* Name Input */}
+            <div>
+              <label className="block text-white text-sm font-medium mb-3 flex items-center">
+                <span className="mr-2">👤</span>
+                Kid's Name(s) <span className="text-red-400 ml-1">*</span>
+              </label>
+              <input
+                type="text"
+                value={kidData.name}
+                onChange={(e) => setKidData(prev => ({ ...prev, name: e.target.value }))}
+                placeholder="Enter names (separated by commas for multiple kids)"
+                className="w-full px-4 py-3 text-sm rounded-lg bg-gray-800 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                required
+              />
             </div>
-          </div>
 
-          {/* Submit Button */}
-          <div className="pt-6">
-            <button
-              type="submit"
-              disabled={!kidData.name || !kidData.age}
-              className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-4 px-8 rounded-2xl text-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed hover:from-blue-700 hover:to-blue-800 transition-all duration-300 transform hover:scale-[1.02] border border-blue-500/50"
-            >
-              Next: Choose Theme →
-            </button>
-          </div>
-        </form>
+            {/* Age Selection */}
+            <div>
+              <label className="block text-white text-sm font-medium mb-3 flex items-center">
+                <span className="mr-2">🎂</span>
+                Age Level <span className="text-red-400 ml-1">*</span>
+              </label>
+              <div className="grid grid-cols-2 gap-3">
+                {[
+                  { label: '3-4 years', value: '3-4' },
+                  { label: '5-7 years', value: '5-7' },
+                  { label: '8-10 years', value: '8-10' },
+                  { label: '11-12 years', value: '11-12' }
+                ].map((ageRange) => (
+                  <button
+                    key={ageRange.value}
+                    type="button"
+                    onClick={() => setKidData(prev => ({ ...prev, age: ageRange.value }))}
+                    className={`py-3 px-4 rounded-lg text-sm font-medium transition-all ${
+                      kidData.age === ageRange.value
+                        ? 'bg-blue-500 text-white border-2 border-blue-400'
+                        : 'bg-gray-800 text-gray-300 border-2 border-gray-600 hover:bg-gray-700 hover:border-gray-500'
+                    }`}
+                  >
+                    {ageRange.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Submit Button */}
+            <div className="pt-4">
+              <button
+                type="submit"
+                disabled={!kidData.name || !kidData.age}
+                className="w-full bg-blue-500 text-white py-3 px-6 rounded-lg text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-600 transition-colors"
+              >
+                Continue
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     </div>
   );
