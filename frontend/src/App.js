@@ -535,7 +535,7 @@ const KidDetails = () => {
             <button
               type="submit"
               disabled={!kidData.name || !kidData.age}
-              className="w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-4 px-8 rounded-2xl text-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed hover:from-purple-600 hover:to-pink-600 transition-all duration-300 transform hover:scale-[1.02]"
+              className="w-full bg-gradient-to-r from-blue-600 to-blue-700 text-white py-4 px-8 rounded-2xl text-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed hover:from-blue-700 hover:to-blue-800 transition-all duration-300 transform hover:scale-[1.02] border border-blue-500/50"
             >
               Next: Choose Theme →
             </button>
