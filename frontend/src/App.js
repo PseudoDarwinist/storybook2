@@ -598,7 +598,7 @@ const KidDetails = () => {
               <button
                 type="submit"
                 disabled={!kidData.name || !kidData.age}
-                className="w-full bg-blue-500 text-white py-3 px-6 rounded-lg text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-blue-600 transition-colors"
+                className="w-full bg-green-500 text-white py-3 px-6 rounded-lg text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-green-600 transition-colors"
               >
                 Continue
               </button>
