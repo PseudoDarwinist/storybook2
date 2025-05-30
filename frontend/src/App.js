@@ -699,48 +699,102 @@ const ThemeSelection = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-900 via-purple-900 to-pink-900 p-6">
-      <div className="max-w-6xl mx-auto">
+    <div className="min-h-screen bg-gray-900 text-white">
+      {/* Step Indicator */}
+      <div className="flex justify-center pt-8 pb-6">
+        <div className="flex items-center space-x-8">
+          {[
+            { num: 1, label: 'Kid Details', sublabel: 'Photos & Info', active: false },
+            { num: 2, label: 'Theme', sublabel: 'Story Setting', active: true },
+            { num: 3, label: 'Story Specs', sublabel: 'Customize', active: false },
+            { num: 4, label: 'Creating Magic', sublabel: 'AI Generation', active: false }
+          ].map((step, index) => (
+            <div key={step.num} className="flex items-center">
+              <div className="text-center">
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold mb-1 ${
+                  step.active ? 'bg-green-500 text-white' : 'bg-gray-700 text-gray-400'
+                }`}>
+                  {step.num}
+                </div>
+                <div className={`text-xs font-medium ${step.active ? 'text-white' : 'text-gray-400'}`}>
+                  {step.label}
+                </div>
+                <div className={`text-xs ${step.active ? 'text-gray-300' : 'text-gray-500'}`}>
+                  {step.sublabel}
+                </div>
+              </div>
+              {index < 3 && (
+                <div className="w-8 h-px bg-gray-600 mx-4 mt-[-20px]"></div>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Main Content */}
+      <div className="max-w-6xl mx-auto px-6">
         <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-white mb-4">Choose Your Adventure</h1>
-          <p className="text-xl text-gray-200">Pick a magical world to explore!</p>
+          <h1 className="text-4xl font-bold text-green-400 mb-4">Choose a Magical Theme</h1>
+          <p className="text-gray-400 text-lg">Pick a magical world to explore!</p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {themes.map((theme) => (
             <div
               key={theme.id}
               onClick={() => handleThemeSelect(theme.id)}
-              className={`cursor-pointer group transform transition-all duration-300 hover:scale-105 ${
+              className={`cursor-pointer group transform transition-all duration-300 hover:scale-105 relative ${
                 selectedTheme === theme.id ? 'scale-105' : ''
               }`}
             >
-              <div className="bg-white/10 backdrop-blur-lg rounded-3xl overflow-hidden border border-white/20 shadow-2xl">
+              <div className="bg-gray-800 rounded-2xl overflow-hidden border border-gray-700 shadow-xl hover:border-green-500/50 transition-all duration-300">
                 <div className="relative h-48 overflow-hidden">
                   <img 
                     src={theme.image} 
                     alt={theme.title}
                     className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                   />
-                  <div className={`absolute inset-0 bg-gradient-to-t ${theme.gradient} opacity-60`}></div>
-                  <div className="absolute inset-0 bg-black/20"></div>
+                  <div className={`absolute inset-0 bg-gradient-to-t ${theme.gradient} opacity-50`}></div>
+                  <div className="absolute inset-0 bg-black/30"></div>
+                  
+                  {/* Selection indicator */}
+                  {selectedTheme === theme.id && (
+                    <div className="absolute inset-0">
+                      <div className="absolute inset-0 border-3 border-green-400 rounded-2xl"></div>
+                      <div className="absolute top-3 right-3 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
+                        <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                      </div>
+                    </div>
+                  )}
                 </div>
-                <div className="p-6">
-                  <h3 className="text-2xl font-bold text-white mb-2">{theme.title}</h3>
-                  <p className="text-gray-200">{theme.description}</p>
+                <div className="p-5">
+                  <h3 className="text-xl font-bold text-white mb-2">{theme.title}</h3>
+                  <p className="text-gray-400 text-sm">{theme.description}</p>
                 </div>
-                {selectedTheme === theme.id && (
-                  <div className="absolute inset-0 border-4 border-white rounded-3xl animate-pulse"></div>
-                )}
               </div>
             </div>
           ))}
         </div>
 
-        <div className="text-center mt-12">
+        {/* Continue Button */}
+        {selectedTheme && (
+          <div className="text-center mt-8">
+            <button
+              onClick={() => navigate('/app/story-customization')}
+              className="bg-green-500 text-white py-3 px-8 rounded-lg text-lg font-medium hover:bg-green-600 transition-colors"
+            >
+              Continue with {themes.find(t => t.id === selectedTheme)?.title}
+            </button>
+          </div>
+        )}
+
+        {/* Back Button */}
+        <div className="text-center mt-6">
           <button
             onClick={() => navigate('/app/kid-details')}
-            className="text-white/80 hover:text-white transition-colors underline"
+            className="text-gray-400 hover:text-white transition-colors text-sm underline"
           >
             ← Back to Kid Details
           </button>
