@@ -816,19 +816,51 @@ const StoryCustomization = () => {
   });
 
   const storyTypes = [
-    { id: 'adventure', title: 'Adventure Story', description: 'Action-packed journey with excitement' },
-    { id: 'educational', title: 'Educational Story', description: 'Learning through fun storytelling' }
+    { 
+      id: 'adventure', 
+      title: 'Adventure Story', 
+      description: 'Brave quests and exciting journeys!',
+      icon: '⚔️',
+      bgColor: 'bg-orange-500'
+    },
+    { 
+      id: 'educational', 
+      title: 'Learning Story', 
+      description: 'Fun facts and cool discoveries!',
+      icon: '🧠',
+      bgColor: 'bg-blue-500'
+    },
+    { 
+      id: 'treasure', 
+      title: 'Treasure Hunt', 
+      description: 'Find hidden treasures and solve puzzles!',
+      icon: '🗺️',
+      bgColor: 'bg-amber-600'
+    },
+    { 
+      id: 'friendship', 
+      title: 'Friendship Tale', 
+      description: 'Meet new friends and help each other!',
+      icon: '👫',
+      bgColor: 'bg-pink-500'
+    }
   ];
 
   const lengths = [
-    { id: 'short', title: 'Short (5-10 pages)', duration: '5-10 min read' },
-    { id: 'medium', title: 'Medium (10-15 pages)', duration: '10-15 min read' },
-    { id: 'long', title: 'Long (15+ pages)', duration: '15+ min read' }
+    { id: 'short', title: 'Quick Story', subtitle: '5 minutes', icon: '⚡', bgColor: 'bg-green-500' },
+    { id: 'medium', title: 'Medium Story', subtitle: '10 minutes', icon: '📖', bgColor: 'bg-blue-500' },
+    { id: 'long', title: 'Epic Story', subtitle: '15+ minutes', icon: '📚', bgColor: 'bg-purple-500' }
   ];
 
   const ingredients = [
-    'Magic spells', 'Talking animals', 'Hidden treasures', 'Flying vehicles',
-    'Secret doors', 'Friendly monsters', 'Time travel', 'Superhero powers'
+    { name: 'Magic spells', icon: '✨' },
+    { name: 'Talking animals', icon: '🦜' },
+    { name: 'Hidden treasures', icon: '💎' },
+    { name: 'Flying vehicles', icon: '🚁' },
+    { name: 'Secret doors', icon: '🚪' },
+    { name: 'Friendly monsters', icon: '👹' },
+    { name: 'Time travel', icon: '⏰' },
+    { name: 'Superhero powers', icon: '💪' }
   ];
 
   const toggleIngredient = (ingredient) => {
@@ -842,100 +874,188 @@ const StoryCustomization = () => {
 
   const handleCreateStory = () => {
     if (customization.storyType && customization.length) {
-      // Store customization data
       sessionStorage.setItem('storyCustomization', JSON.stringify(customization));
       navigate('/app/story-creation');
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-900 via-teal-900 to-cyan-900 p-6">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-12">
-          <h1 className="text-5xl font-bold text-white mb-4">Customize Your Story</h1>
-          <p className="text-xl text-gray-200">Make it uniquely yours!</p>
+    <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
+      {/* Modal Overlay */}
+      <div className="fixed inset-0 bg-black bg-opacity-50"></div>
+      
+      {/* Modal Content */}
+      <div className="relative bg-gray-800 rounded-3xl p-8 max-w-4xl w-full mx-auto shadow-2xl border border-gray-700 max-h-[95vh] overflow-y-auto">
+        
+        {/* Step Indicator */}
+        <div className="flex justify-center mb-8">
+          <div className="flex items-center space-x-6">
+            {[
+              { num: 1, label: 'Kid Details', sublabel: 'Photos & Info', active: false, icon: '👤' },
+              { num: 2, label: 'Theme', sublabel: 'Story Setting', active: false, icon: '🎨' },
+              { num: 3, label: 'Story Specs', sublabel: 'Customize', active: true, icon: '📝' },
+              { num: 4, label: 'Creating Magic', sublabel: 'AI Generation', active: false, icon: '✨' }
+            ].map((step, index) => (
+              <div key={step.num} className="flex items-center">
+                <div className="text-center">
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center text-lg mb-1 ${
+                    step.active ? 'bg-green-500 text-white' : 'bg-gray-600 text-gray-300'
+                  }`}>
+                    {step.icon}
+                  </div>
+                  <div className={`text-xs font-medium ${step.active ? 'text-white' : 'text-gray-400'}`}>
+                    {step.label}
+                  </div>
+                  <div className={`text-xs ${step.active ? 'text-gray-300' : 'text-gray-500'}`}>
+                    {step.sublabel}
+                  </div>
+                </div>
+                {index < 3 && (
+                  <div className="w-6 h-px bg-gray-600 mx-3 mt-[-20px]"></div>
+                )}
+              </div>
+            ))}
+          </div>
         </div>
 
-        <div className="space-y-12">
-          {/* Story Type */}
-          <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20">
-            <h2 className="text-2xl font-bold text-white mb-6">What type of story?</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Header with Adventure Images */}
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold text-white mb-2">Customize Your Story!</h2>
+          <p className="text-gray-400 mb-6">Let's make your adventure perfect for you!</p>
+          
+          {/* Adventure Images */}
+          <div className="flex justify-center gap-4 mb-6">
+            <div className="w-24 h-24 rounded-xl overflow-hidden border-2 border-orange-400">
+              <img 
+                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjRkY4QzAwIi8+CjwhLS0gQWR2ZW50dXJlIFNjZW5lIC0tPgo8Y2lyY2xlIGN4PSI1MCIgY3k9IjUwIiByPSIxNSIgZmlsbD0iI0ZGRkZGRiIvPgo8cGF0aCBkPSJNIDQwIDEwMCBMIDYwIDEwMCBMIDUwIDUwIFoiIGZpbGw9IiMzNDQ5NUUiLz4KPHN2Zz4="
+                alt="Adventure Scene" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <div className="w-24 h-24 rounded-xl overflow-hidden border-2 border-amber-400">
+              <img 
+                src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgdmlld0JveD0iMCAwIDIwMCAyMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSIyMDAiIGhlaWdodD0iMjAwIiBmaWxsPSIjRkZENzAwIi8+CjwhLS0gVHJlYXN1cmUgTWFwIC0tPgo8Y2lyY2xlIGN4PSIxMDAiIGN5PSIxMDAiIHI9IjIwIiBmaWxsPSIjRkY0NDQ0Ii8+CjxwYXRoIGQ9Ik0gOTAgOTAgTCAxMTAgOTAgTCAxMTAgMTEwIEwgOTAgMTEwIFoiIGZpbGw9IiM4QjQ1MTMiLz4KPHN2Zz4="
+                alt="Treasure Map" 
+                className="w-full h-full object-cover"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div className="space-y-8">
+          {/* Story Type Selection */}
+          <div>
+            <h3 className="text-xl font-bold text-white mb-4 flex items-center">
+              <span className="mr-3">📖</span>
+              What kind of story do you want?
+            </h3>
+            <div className="grid grid-cols-2 gap-4">
               {storyTypes.map((type) => (
                 <button
                   key={type.id}
                   onClick={() => setCustomization(prev => ({ ...prev, storyType: type.id }))}
-                  className={`p-6 rounded-2xl text-left transition-all ${
-                    customization.storyType === type.id
-                      ? 'bg-emerald-500 text-white shadow-lg scale-105'
-                      : 'bg-white/20 text-white hover:bg-white/30'
+                  className={`p-4 rounded-2xl text-center transition-all duration-200 ${type.bgColor} ${
+                    customization.storyType === type.id 
+                      ? 'ring-4 ring-green-400 ring-opacity-60 scale-105' 
+                      : 'hover:scale-105'
                   }`}
                 >
-                  <h3 className="text-xl font-semibold mb-2">{type.title}</h3>
-                  <p className="text-sm opacity-90">{type.description}</p>
+                  {customization.storyType === type.id && (
+                    <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-400 rounded-full flex items-center justify-center">
+                      <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                  )}
+                  <div className="text-3xl mb-2">{type.icon}</div>
+                  <h4 className="text-white font-bold text-sm mb-1">{type.title}</h4>
+                  <p className="text-white text-xs opacity-90">{type.description}</p>
                 </button>
               ))}
             </div>
           </div>
 
           {/* Story Length */}
-          <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20">
-            <h2 className="text-2xl font-bold text-white mb-6">How long should it be?</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div>
+            <h3 className="text-xl font-bold text-white mb-4 flex items-center">
+              <span className="mr-3">⏱️</span>
+              How long should your story be?
+            </h3>
+            <div className="grid grid-cols-3 gap-4">
               {lengths.map((length) => (
                 <button
                   key={length.id}
                   onClick={() => setCustomization(prev => ({ ...prev, length: length.id }))}
-                  className={`p-4 rounded-2xl text-center transition-all ${
-                    customization.length === length.id
-                      ? 'bg-teal-500 text-white shadow-lg scale-105'
-                      : 'bg-white/20 text-white hover:bg-white/30'
+                  className={`p-4 rounded-2xl text-center transition-all duration-200 ${length.bgColor} relative ${
+                    customization.length === length.id 
+                      ? 'ring-4 ring-green-400 ring-opacity-60 scale-105' 
+                      : 'hover:scale-105'
                   }`}
                 >
-                  <h3 className="font-semibold mb-1">{length.title}</h3>
-                  <p className="text-sm opacity-90">{length.duration}</p>
+                  {customization.length === length.id && (
+                    <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-400 rounded-full flex items-center justify-center">
+                      <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                  )}
+                  <div className="text-2xl mb-2">{length.icon}</div>
+                  <h4 className="text-white font-bold text-sm mb-1">{length.title}</h4>
+                  <p className="text-white text-xs opacity-90">{length.subtitle}</p>
                 </button>
               ))}
             </div>
           </div>
 
           {/* Special Ingredients */}
-          <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 border border-white/20">
-            <h2 className="text-2xl font-bold text-white mb-6">Add special ingredients (optional)</h2>
+          <div>
+            <h3 className="text-xl font-bold text-white mb-4 flex items-center">
+              <span className="mr-3">🪄</span>
+              Add some magical ingredients! (Pick any you like)
+            </h3>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {ingredients.map((ingredient) => (
                 <button
-                  key={ingredient}
-                  onClick={() => toggleIngredient(ingredient)}
-                  className={`p-3 rounded-xl text-sm font-medium transition-all ${
-                    customization.specialIngredients.includes(ingredient)
-                      ? 'bg-cyan-500 text-white shadow-lg'
-                      : 'bg-white/20 text-white hover:bg-white/30'
+                  key={ingredient.name}
+                  onClick={() => toggleIngredient(ingredient.name)}
+                  className={`p-3 rounded-xl text-center transition-all duration-200 ${
+                    customization.specialIngredients.includes(ingredient.name)
+                      ? 'bg-green-500 text-white ring-2 ring-green-300 scale-105'
+                      : 'bg-gray-700 text-gray-300 hover:bg-gray-600 hover:scale-105'
                   }`}
                 >
-                  {ingredient}
+                  <div className="text-xl mb-1">{ingredient.icon}</div>
+                  <div className="text-xs font-medium">{ingredient.name}</div>
                 </button>
               ))}
             </div>
           </div>
+        </div>
 
-          {/* Action Buttons */}
-          <div className="flex justify-between items-center pt-6">
-            <button
-              onClick={() => navigate('/app/theme-selection')}
-              className="text-white/80 hover:text-white transition-colors underline"
-            >
-              ← Back to Themes
-            </button>
-            
-            <button
-              onClick={handleCreateStory}
-              disabled={!customization.storyType || !customization.length}
-              className="bg-gradient-to-r from-emerald-500 to-teal-500 text-white py-4 px-8 rounded-2xl text-lg font-semibold disabled:opacity-50 disabled:cursor-not-allowed hover:from-emerald-600 hover:to-teal-600 transition-all duration-300 transform hover:scale-[1.02]"
-            >
-              Create My Story! →
-            </button>
-          </div>
+        {/* Navigation Buttons */}
+        <div className="flex justify-between items-center mt-8 pt-6 border-t border-gray-700">
+          <button
+            onClick={() => navigate('/app/theme-selection')}
+            className="flex items-center text-gray-400 hover:text-white transition-colors"
+          >
+            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            Back to Themes
+          </button>
+          
+          <button
+            onClick={handleCreateStory}
+            disabled={!customization.storyType || !customization.length}
+            className={`flex items-center px-8 py-3 rounded-xl font-bold text-lg transition-all ${
+              customization.storyType && customization.length
+                ? 'bg-green-500 text-white hover:bg-green-600 transform hover:scale-105 shadow-lg' 
+                : 'bg-gray-600 text-gray-400 cursor-not-allowed'
+            }`}
+          >
+            Create My Story! 
+            <span className="ml-2">🚀</span>
+          </button>
         </div>
       </div>
     </div>
