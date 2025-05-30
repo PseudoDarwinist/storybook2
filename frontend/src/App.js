@@ -570,7 +570,7 @@ const KidDetails = () => {
                 <span className="mr-2">🎂</span>
                 Age Level <span className="text-red-400 ml-1">*</span>
               </label>
-              <div className="grid grid-cols-2 gap-3">
+              <div className="flex gap-3 overflow-x-auto pb-2">
                 {[
                   { label: '3-4 years', value: '3-4' },
                   { label: '5-7 years', value: '5-7' },
@@ -581,9 +581,9 @@ const KidDetails = () => {
                     key={ageRange.value}
                     type="button"
                     onClick={() => setKidData(prev => ({ ...prev, age: ageRange.value }))}
-                    className={`py-3 px-4 rounded-lg text-sm font-medium transition-all ${
+                    className={`py-3 px-6 rounded-full text-sm font-medium transition-all whitespace-nowrap flex-shrink-0 ${
                       kidData.age === ageRange.value
-                        ? 'bg-blue-500 text-white border-2 border-blue-400'
+                        ? 'bg-green-500 text-white border-2 border-green-400'
                         : 'bg-gray-800 text-gray-300 border-2 border-gray-600 hover:bg-gray-700 hover:border-gray-500'
                     }`}
                   >
