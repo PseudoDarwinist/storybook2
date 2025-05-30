@@ -436,11 +436,47 @@ const KidDetails = () => {
   const handlePhotoUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
+      // Validate file type
+      if (!file.type.startsWith('image/')) {
+        alert('Please select an image file');
+        return;
+      }
+      
+      // Validate file size (max 5MB)
+      if (file.size > 5 * 1024 * 1024) {
+        alert('Image size must be less than 5MB');
+        return;
+      }
+
       const reader = new FileReader();
       reader.onload = (e) => {
         setKidData(prev => ({ ...prev, photo: e.target.result }));
       };
+      reader.onerror = () => {
+        alert('Error reading file. Please try again.');
+      };
       reader.readAsDataURL(file);
+    }
+  };
+
+  const handleDragOver = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  };
+
+  const handleDrop = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+    
+    const file = e.dataTransfer.files[0];
+    if (file) {
+      // Create a synthetic event object for handlePhotoUpload
+      const syntheticEvent = {
+        target: {
+          files: [file]
+        }
+      };
+      handlePhotoUpload(syntheticEvent);
     }
   };
 
