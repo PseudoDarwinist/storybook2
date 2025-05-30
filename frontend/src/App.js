@@ -491,7 +491,7 @@ const KidDetails = () => {
         <div className="max-w-lg w-full">
           {/* Header */}
           <div className="text-center mb-8">
-            <h1 className="text-3xl font-bold text-white mb-3">Tell Us About Your Little Hero!</h1>
+            <h1 className="text-3xl font-bold text-green-400 mb-3">Tell Us About Your Little One!</h1>
             <p className="text-gray-400 text-sm">Upload photos and share their names to personalize the story</p>
           </div>
 
