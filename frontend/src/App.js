@@ -502,7 +502,7 @@ const KidDetails = () => {
               value={kidData.name}
               onChange={(e) => setKidData(prev => ({ ...prev, name: e.target.value }))}
               placeholder="Enter name..."
-              className="w-full px-6 py-4 text-lg rounded-2xl border-none bg-white/20 backdrop-blur text-white placeholder-gray-300 focus:outline-none focus:ring-4 focus:ring-purple-400/50"
+              className="w-full px-6 py-4 text-lg rounded-2xl border border-gray-600/50 bg-gray-800/70 backdrop-blur text-white placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-blue-500/50 focus:border-blue-500/50"
               required
             />
           </div>
