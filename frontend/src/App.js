@@ -559,7 +559,7 @@ const KidDetails = () => {
                 value={kidData.name}
                 onChange={(e) => setKidData(prev => ({ ...prev, name: e.target.value }))}
                 placeholder="Enter names (separated by commas for multiple kids)"
-                className="w-full px-4 py-3 text-sm rounded-lg bg-gray-800 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full px-4 py-3 text-sm rounded-lg bg-gray-800 border border-gray-600 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
                 required
               />
             </div>
