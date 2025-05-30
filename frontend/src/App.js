@@ -454,8 +454,8 @@ const KidDetails = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-900 via-blue-900 to-indigo-900 flex items-center justify-center p-6">
-      <div className="max-w-2xl w-full bg-white/10 backdrop-blur-lg rounded-3xl shadow-2xl p-8 border border-white/20">
+    <div className="min-h-screen bg-black flex items-center justify-center p-6">
+      <div className="max-w-2xl w-full bg-gray-900/90 backdrop-blur-lg rounded-3xl shadow-2xl p-8 border border-gray-700/50">
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-white mb-4">Tell us about your little one!</h1>
           <p className="text-lg text-gray-200">Let's create a personalized story just for them</p>
