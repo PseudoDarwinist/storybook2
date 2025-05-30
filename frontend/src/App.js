@@ -467,7 +467,7 @@ const KidDetails = () => {
             <div key={step.num} className="flex items-center">
               <div className="text-center">
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold mb-1 ${
-                  step.active ? 'bg-blue-500 text-white' : 'bg-gray-700 text-gray-400'
+                  step.active ? 'bg-green-500 text-white' : 'bg-gray-700 text-gray-400'
                 }`}>
                   {step.num}
                 </div>
