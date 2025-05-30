@@ -474,7 +474,7 @@ const KidDetails = () => {
               />
               <label 
                 htmlFor="photo"
-                className="cursor-pointer block w-32 h-32 mx-auto rounded-full border-4 border-dashed border-white/50 hover:border-white/80 transition-colors overflow-hidden bg-white/10"
+                className="cursor-pointer block w-32 h-32 mx-auto rounded-full border-4 border-dashed border-gray-400/60 hover:border-gray-300/80 transition-colors overflow-hidden bg-gray-800/50"
               >
                 {kidData.photo ? (
                   <img 
