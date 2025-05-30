@@ -511,14 +511,19 @@ const KidDetails = () => {
               />
               <label 
                 htmlFor="photo"
-                className="cursor-pointer block w-full h-48 border-2 border-dashed border-gray-600 rounded-lg bg-gray-800 hover:bg-gray-750 transition-colors"
+                className="cursor-pointer block w-full h-48 border-2 border-dashed border-gray-600 rounded-lg bg-gray-800 hover:bg-gray-750 transition-colors relative overflow-hidden"
               >
                 {kidData.photo ? (
-                  <img 
-                    src={kidData.photo} 
-                    alt="Kid" 
-                    className="w-full h-full object-cover rounded-lg"
-                  />
+                  <div className="relative w-full h-full">
+                    <img 
+                      src={kidData.photo} 
+                      alt="Kid" 
+                      className="w-full h-full object-cover rounded-lg"
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-20 transition-all duration-200 flex items-center justify-center">
+                      <span className="text-white text-sm opacity-0 hover:opacity-100 transition-opacity">Click to change photo</span>
+                    </div>
+                  </div>
                 ) : (
                   <div className="flex flex-col items-center justify-center h-full">
                     <div className="w-16 h-16 mb-3">
