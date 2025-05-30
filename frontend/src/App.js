@@ -520,8 +520,8 @@ const KidDetails = () => {
                   onClick={() => setKidData(prev => ({ ...prev, age: age.toString() }))}
                   className={`py-3 px-4 rounded-xl text-lg font-semibold transition-all ${
                     kidData.age === age.toString()
-                      ? 'bg-purple-500 text-white shadow-lg scale-105'
-                      : 'bg-white/20 text-white hover:bg-white/30'
+                      ? 'bg-blue-600 text-white shadow-lg scale-105 border-2 border-blue-400'
+                      : 'bg-gray-800/70 text-white hover:bg-gray-700/80 border-2 border-gray-600/50 hover:border-gray-500'
                   }`}
                 >
                   {age}
