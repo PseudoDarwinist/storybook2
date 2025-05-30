@@ -565,24 +565,11 @@ const KidDetails = () => {
                 ) : (
                   <div className="flex flex-col items-center justify-center h-full">
                     <div className="w-16 h-16 mb-3">
-                      <svg viewBox="0 0 200 200" className="w-full h-full">
-                        {/* Camera body */}
-                        <rect x="40" y="80" width="120" height="80" rx="8" fill="#4ade80" stroke="#22c55e" strokeWidth="2"/>
-                        {/* Camera top */}
-                        <rect x="60" y="60" width="80" height="30" rx="6" fill="#22c55e"/>
-                        {/* Viewfinder */}
-                        <circle cx="140" cy="70" r="6" fill="#1f2937"/>
-                        {/* Lens outer */}
-                        <circle cx="100" cy="120" r="25" fill="#1f2937" stroke="#374151" strokeWidth="2"/>
-                        {/* Lens inner */}
-                        <circle cx="100" cy="120" r="18" fill="#3b82f6"/>
-                        {/* Lens center */}
-                        <circle cx="100" cy="120" r="8" fill="#1e40af"/>
-                        {/* Lens highlight */}
-                        <circle cx="105" cy="115" r="3" fill="#60a5fa" opacity="0.7"/>
-                        {/* Flash */}
-                        <rect x="70" y="65" width="8" height="8" rx="2" fill="#374151"/>
-                      </svg>
+                      <img 
+                        src="https://cdn-icons-png.flaticon.com/512/10473/10473491.png" 
+                        alt="Camera" 
+                        className="w-full h-full object-contain"
+                      />
                     </div>
                     <p className="text-white text-sm font-medium mb-1">Drag & drop a photo here</p>
                     <p className="text-gray-400 text-xs">or click to browse files</p>
