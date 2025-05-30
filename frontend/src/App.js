@@ -548,6 +548,8 @@ const KidDetails = () => {
               <label 
                 htmlFor="photo"
                 className="cursor-pointer block w-full h-48 border-2 border-dashed border-gray-600 rounded-lg bg-gray-800 hover:bg-gray-750 transition-colors relative overflow-hidden"
+                onDragOver={handleDragOver}
+                onDrop={handleDrop}
               >
                 {kidData.photo ? (
                   <div className="relative w-full h-full">
