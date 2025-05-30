@@ -699,104 +699,107 @@ const ThemeSelection = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white">
-      {/* Step Indicator */}
-      <div className="flex justify-center pt-8 pb-6">
-        <div className="flex items-center space-x-8">
-          {[
-            { num: 1, label: 'Kid Details', sublabel: 'Photos & Info', active: false },
-            { num: 2, label: 'Theme', sublabel: 'Story Setting', active: true },
-            { num: 3, label: 'Story Specs', sublabel: 'Customize', active: false },
-            { num: 4, label: 'Creating Magic', sublabel: 'AI Generation', active: false }
-          ].map((step, index) => (
-            <div key={step.num} className="flex items-center">
-              <div className="text-center">
-                <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold mb-1 ${
-                  step.active ? 'bg-green-500 text-white' : 'bg-gray-700 text-gray-400'
-                }`}>
-                  {step.num}
+    <div className="min-h-screen bg-gray-900 flex items-center justify-center p-4">
+      {/* Modal Overlay */}
+      <div className="fixed inset-0 bg-black bg-opacity-50"></div>
+      
+      {/* Modal Content */}
+      <div className="relative bg-gray-800 rounded-3xl p-8 max-w-2xl w-full mx-auto shadow-2xl border border-gray-700">
+        
+        {/* Step Indicator */}
+        <div className="flex justify-center mb-8">
+          <div className="flex items-center space-x-6">
+            {[
+              { num: 1, label: 'Kid Details', sublabel: 'Photos & Info', active: false, icon: '👤' },
+              { num: 2, label: 'Theme', sublabel: 'Story Setting', active: true, icon: '🎨' },
+              { num: 3, label: 'Story Specs', sublabel: 'Customize', active: false, icon: '📝' },
+              { num: 4, label: 'Creating Magic', sublabel: 'AI Generation', active: false, icon: '✨' }
+            ].map((step, index) => (
+              <div key={step.num} className="flex items-center">
+                <div className="text-center">
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center text-lg mb-1 ${
+                    step.active ? 'bg-green-500 text-white' : 'bg-gray-600 text-gray-300'
+                  }`}>
+                    {step.icon}
+                  </div>
+                  <div className={`text-xs font-medium ${step.active ? 'text-white' : 'text-gray-400'}`}>
+                    {step.label}
+                  </div>
+                  <div className={`text-xs ${step.active ? 'text-gray-300' : 'text-gray-500'}`}>
+                    {step.sublabel}
+                  </div>
                 </div>
-                <div className={`text-xs font-medium ${step.active ? 'text-white' : 'text-gray-400'}`}>
-                  {step.label}
-                </div>
-                <div className={`text-xs ${step.active ? 'text-gray-300' : 'text-gray-500'}`}>
-                  {step.sublabel}
-                </div>
+                {index < 3 && (
+                  <div className="w-6 h-px bg-gray-600 mx-3 mt-[-20px]"></div>
+                )}
               </div>
-              {index < 3 && (
-                <div className="w-8 h-px bg-gray-600 mx-4 mt-[-20px]"></div>
-              )}
-            </div>
-          ))}
-        </div>
-      </div>
-
-      {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-6">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-green-400 mb-4">Choose a Magical Theme</h1>
-          <p className="text-gray-400 text-lg">Pick a magical world to explore!</p>
+            ))}
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {/* Header */}
+        <div className="text-center mb-8">
+          <h2 className="text-3xl font-bold text-white mb-2">Choose a Magical Theme</h2>
+          <p className="text-gray-400">Select the perfect backdrop for your story adventure</p>
+        </div>
+
+        {/* Theme Grid */}
+        <div className="grid grid-cols-3 gap-4 mb-8">
           {themes.map((theme) => (
             <div
               key={theme.id}
               onClick={() => handleThemeSelect(theme.id)}
-              className={`cursor-pointer group transform transition-all duration-300 hover:scale-105 relative ${
-                selectedTheme === theme.id ? 'scale-105' : ''
+              className={`cursor-pointer group relative rounded-2xl p-4 text-center transition-all duration-200 ${theme.bgColor} ${
+                selectedTheme === theme.id 
+                  ? 'ring-4 ring-green-400 ring-opacity-60 scale-105' 
+                  : 'hover:scale-105'
               }`}
             >
-              <div className="bg-gray-800 rounded-2xl overflow-hidden border border-gray-700 shadow-xl hover:border-green-500/50 transition-all duration-300">
-                <div className="relative h-48 overflow-hidden">
-                  <img 
-                    src={theme.image} 
-                    alt={theme.title}
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                  />
-                  <div className={`absolute inset-0 bg-gradient-to-t ${theme.gradient} opacity-50`}></div>
-                  <div className="absolute inset-0 bg-black/30"></div>
-                  
-                  {/* Selection indicator */}
-                  {selectedTheme === theme.id && (
-                    <div className="absolute inset-0">
-                      <div className="absolute inset-0 border-3 border-green-400 rounded-2xl"></div>
-                      <div className="absolute top-3 right-3 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center">
-                        <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                      </div>
-                    </div>
-                  )}
+              {/* Selection Check */}
+              {selectedTheme === theme.id && (
+                <div className="absolute -top-2 -right-2 w-6 h-6 bg-green-400 rounded-full flex items-center justify-center">
+                  <svg className="w-4 h-4 text-white" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                  </svg>
                 </div>
-                <div className="p-5">
-                  <h3 className="text-xl font-bold text-white mb-2">{theme.title}</h3>
-                  <p className="text-gray-400 text-sm">{theme.description}</p>
-                </div>
-              </div>
+              )}
+              
+              <div className="text-4xl mb-3">{theme.icon}</div>
+              <h3 className="text-white font-bold text-sm mb-1">{theme.title}</h3>
+              <p className="text-white text-xs opacity-90 leading-tight">{theme.description}</p>
             </div>
           ))}
         </div>
 
-        {/* Continue Button */}
-        {selectedTheme && (
-          <div className="text-center mt-8">
-            <button
-              onClick={() => navigate('/app/story-customization')}
-              className="bg-green-500 text-white py-3 px-8 rounded-lg text-lg font-medium hover:bg-green-600 transition-colors"
-            >
-              Continue with {themes.find(t => t.id === selectedTheme)?.title}
-            </button>
-          </div>
-        )}
-
-        {/* Back Button */}
-        <div className="text-center mt-6">
+        {/* Navigation Buttons */}
+        <div className="flex justify-between items-center">
           <button
             onClick={() => navigate('/app/kid-details')}
-            className="text-gray-400 hover:text-white transition-colors text-sm underline"
+            className="flex items-center text-gray-400 hover:text-white transition-colors"
           >
-            ← Back to Kid Details
+            <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+            Back
+          </button>
+          
+          <button
+            onClick={() => {
+              if (selectedTheme) {
+                navigate('/app/story-customization');
+              }
+            }}
+            disabled={!selectedTheme}
+            className={`flex items-center px-6 py-2 rounded-lg font-medium transition-all ${
+              selectedTheme 
+                ? 'bg-green-500 text-white hover:bg-green-600' 
+                : 'bg-gray-600 text-gray-400 cursor-not-allowed'
+            }`}
+          >
+            Next Step
+            <svg className="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+            </svg>
           </button>
         </div>
       </div>
