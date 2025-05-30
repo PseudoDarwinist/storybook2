@@ -649,43 +649,43 @@ const ThemeSelection = () => {
       id: 'forest',
       title: 'Adventure in Forest',
       description: 'Explore magical woods with talking animals',
-      image: 'https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=300&fit=crop&crop=center',
-      gradient: 'from-green-600 to-emerald-700'
+      icon: '🌲',
+      bgColor: 'bg-green-600'
     },
     {
       id: 'space',
-      title: 'Space Exploration',
+      title: 'Space Exploration', 
       description: 'Journey through galaxies and meet alien friends',
-      image: 'https://images.unsplash.com/photo-1446776653964-20c1d3a81b06?w=400&h=300&fit=crop&crop=center',
-      gradient: 'from-purple-600 to-indigo-700'
+      icon: '🚀',
+      bgColor: 'bg-blue-600'
     },
     {
       id: 'ocean',
       title: 'Ocean Discovery',
-      description: 'Dive deep and discover underwater treasures',
-      image: 'https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=400&h=300&fit=crop&crop=center',
-      gradient: 'from-blue-600 to-cyan-700'
+      description: 'Dive deep and discover underwater treasures', 
+      icon: '🌊',
+      bgColor: 'bg-cyan-600'
     },
     {
       id: 'castle',
-      title: 'Royal Castle',
+      title: 'Magical Kingdom',
       description: 'Knights, princesses, and magical kingdoms',
-      image: 'https://images.unsplash.com/photo-1520637836862-4d197d17c962?w=400&h=300&fit=crop&crop=center',
-      gradient: 'from-amber-600 to-orange-700'
+      icon: '👑',
+      bgColor: 'bg-orange-600'
     },
     {
       id: 'dinosaur',
-      title: 'Dinosaur Land',
+      title: 'Dinosaur World',
       description: 'Meet friendly dinosaurs in prehistoric times',
-      image: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop&crop=center',
-      gradient: 'from-red-600 to-pink-700'
+      icon: '🦕',
+      bgColor: 'bg-red-600'
     },
     {
-      id: 'fairy',
-      title: 'Fairy Kingdom',
-      description: 'Magical fairies and enchanted gardens',
-      image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=300&fit=crop&crop=center',
-      gradient: 'from-pink-600 to-rose-700'
+      id: 'custom',
+      title: 'Custom Theme...',
+      description: 'Create your own magical world',
+      icon: '✨',
+      bgColor: 'bg-purple-600'
     }
   ];
 
